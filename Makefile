@@ -1,5 +1,5 @@
 CC = g++
-SRC = src/main.cc src/map.cc
+SRC = src/main.cc src/map.cc src/player.cc
 
 
 CFLAGS = -g -Wall
