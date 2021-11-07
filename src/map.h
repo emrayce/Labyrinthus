@@ -1,9 +1,12 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <cstddef>
+
 class Map {
     private:
-    char map[10][10] = {
+    static const size_t SIZE = 10;
+    char map[SIZE][SIZE] = {
         {'#','E','#','#','#','#','#','#','#','#'},
         {'#',' ',' ',' ','#','#',' ',' ',' ','#'},
         {'#','#','#',' ','#',' ',' ','#',' ','#'},
