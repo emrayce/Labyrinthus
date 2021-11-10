@@ -1,4 +1,5 @@
 #include "map.h"
+
 #include <iostream>
 #include <cstddef>
 #include <utility>
@@ -17,6 +18,20 @@ void Map::display() {
     cout << displayed << endl;
 }
 
-bool Map::IsPositionValid(size_t x, size_t y) {
-    return map[x][y] != '#';
+bool Map::isPositionValid(size_t line, size_t col) {
+    if (line >= SIZE || col >= SIZE) {
+        return false;
+    }
+    if (map[line][col] == '#') {
+        return false;
+    }
+    
+    return true;
+}
+
+void Map::movePlayer(size_t line, size_t col) {
+    map[playerPosition.first][playerPosition.second] = ' ';
+    playerPosition.first = line;
+    playerPosition.second = col;
+    map[playerPosition.first][playerPosition.second] = 'P';
 }

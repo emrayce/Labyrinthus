@@ -5,15 +5,14 @@
 using namespace std;
 
 Player::Player(size_t x, size_t y) {
-    posX = x;
-    posY = y;
+    position = make_pair(x, y);
 }
 
 void Player::display() {
-    cout << "Player: pos_x: " << posX << ", pos_y: " << posY << endl;
+    cout << "Player: pos_x: " << position.first << ", pos_y: " << position.second << endl;
 }
 
 void Player::move(size_t x, size_t y) {
-    posX = x;
-    posY = y;
+    position.first = x;
+    position.second = y;
 }

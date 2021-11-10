@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <utility>
 
+using namespace std;
 class Map {
     private:
         static const size_t SIZE = 10;
@@ -17,10 +18,12 @@ class Map {
         {'#','#','#','#','#','#','#',' ','#','#'},
         {'#','#','#','#','#',' ',' ',' ','#','#'},
         {'#','#','#',' ',' ',' ','#','#','#','#'},
-        {'#','#','#','#','#','S','#','#','#','#'}
+        {'#','#','#','#','#','P','#','#','#','#'}
     };
 
-        std::pair<size_t, size_t> start = std::make_pair(5, 9);
+        pair<size_t, size_t> start = make_pair(9, 5);
+        pair<size_t, size_t> end = make_pair(0, 1);
+        pair<size_t, size_t> playerPosition = make_pair(9, 5);
 
 
     public:
@@ -28,11 +31,15 @@ class Map {
 
         // check if the given position is valid
         // valid position are:
-        // empty cell
-        bool IsPositionValid(size_t x, size_t y);
+        //      cells inside SIZE range
+        //      empty cell
+        bool isPositionValid(size_t line, size_t col);
 
-        std::pair<size_t, size_t> getStartPosition() { return start; };
+        pair<size_t, size_t> getStartPosition() { return start; };
+        pair<size_t, size_t> getEndPosition() { return end; }
+        pair<size_t, size_t> getPlayerPosition() {return playerPosition; }
 
+        void movePlayer(size_t line, size_t col);
 };
 
 
