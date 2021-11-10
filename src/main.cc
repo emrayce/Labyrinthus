@@ -1,16 +1,12 @@
 #include <iostream>
-#include <utility>
-#include "map.h"
-#include "player.h"
+#include "game.h"
+
 using namespace std;
 
 int main() {
-    Map map;
-    map.display();
+    Game game;
 
-    auto start = map.getStartPosition();
-    Player player(start.first, start.second);
-    player.display();
+    game.gameLoop();
 
     return 0;
 
