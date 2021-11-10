@@ -1,6 +1,7 @@
 #include "map.h"
 #include <iostream>
 #include <cstddef>
+#include <utility>
 
 using namespace std;
 
@@ -14,4 +15,8 @@ void Map::display() {
     }
 
     cout << displayed << endl;
+}
+
+bool Map::IsPositionValid(size_t x, size_t y) {
+    return map[x][y] != '#';
 }
