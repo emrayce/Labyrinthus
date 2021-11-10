@@ -5,10 +5,15 @@
 using namespace std;
 
 Player::Player(size_t x, size_t y) {
-    pos_x = x;
-    pos_y = y;
+    posX = x;
+    posY = y;
 }
 
 void Player::display() {
-    cout << "Player: pos_x: " << pos_x << ", pos_y: " << pos_y << endl;
+    cout << "Player: pos_x: " << posX << ", pos_y: " << posY << endl;
+}
+
+void Player::move(size_t x, size_t y) {
+    posX = x;
+    posY = y;
 }
