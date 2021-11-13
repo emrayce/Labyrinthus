@@ -6,8 +6,8 @@
 
 using namespace std;
 
-Game::Game() {
-    map = new Map();
+Game::Game(string path) {
+    map = new Map(path);
 }
 
 void Game::movePlayer(int x, int y) {

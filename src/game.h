@@ -8,7 +8,7 @@ class Game {
         Map* map;
 
     public: 
-        Game();
+        Game(string path);
         void movePlayer(int line, int col);
 
         void gameLoop();

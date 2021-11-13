@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    Game game;
+    Game game("Map/test.map");
 
     game.gameLoop();
 
