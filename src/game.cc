@@ -7,7 +7,7 @@
 using namespace std;
 
 Game::Game(string path) {
-    map = new Map(path);
+    map = new MapCell(path);
 }
 
 void Game::movePlayer(int x, int y) {

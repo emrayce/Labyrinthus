@@ -1,8 +1,8 @@
 CC = g++
-SRC = src/main.cc src/map.cc src/player.cc src/game.cc
-
+SRC_DIR = src/
+SRC_FILES := $(wildcard $(SRC_DIR)/*.cc)
 
 CFLAGS = -g -Wall -Werror
 
 all:
-	$(CC) $(CFLAGS) $(SRC)
+	$(CC) $(CFLAGS) $(SRC_FILES)

@@ -1,11 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "map.h"
+#include "map_cell.h"
 
 class Game {
     private:
-        Map* map;
+        MapCell* map;
 
     public: 
         Game(string path);

@@ -1,4 +1,4 @@
-#include "map.h"
+#include "map_cell.h"
 
 #include <iostream>
 #include <cstddef>
@@ -7,13 +7,13 @@
 
 using namespace std;
 
-Map::Map(string path) {
+MapCell::MapCell(string path) {
     createMap(path);
     playerPosition = make_pair(5, 14);
     map[5][14] = 'P';
 }
 
-void Map::display() {
+void MapCell::display() {
     //clear screen and set curso to row1 col1
     cout << "\033[2J\033[1;1H";
 
@@ -28,7 +28,7 @@ void Map::display() {
     cout << displayed << endl;
 }
 
-bool Map::isPositionValid(size_t line, size_t col) {
+bool MapCell::isPositionValid(size_t line, size_t col) {
     if (line >= WIDTH || col >= LENGTH) {
         return false;
     }
@@ -39,7 +39,7 @@ bool Map::isPositionValid(size_t line, size_t col) {
     return true;
 }
 
-void Map::movePlayer(size_t line, size_t col) {
+void MapCell::movePlayer(size_t line, size_t col) {
     map[playerPosition.first][playerPosition.second] = ' ';
     playerPosition.first = line;
     playerPosition.second = col;
@@ -48,7 +48,7 @@ void Map::movePlayer(size_t line, size_t col) {
 
 // return false if an error occured
 // true otherwise
-bool Map::createMap(string path) {
+bool MapCell::createMap(string path) {
     cout << path;
     ifstream cell(path);
 
@@ -72,7 +72,7 @@ bool Map::createMap(string path) {
     return row == 21;
 }
 
-void Map::fillRow(string line, size_t row) {
+void MapCell::fillRow(string line, size_t row) {
     for (size_t i = 0; i < line.size(); i++) {
         map[row][i] = line[i];
         cout << line[i];

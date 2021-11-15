@@ -1,12 +1,12 @@
-#ifndef MAP_H
-#define MAP_H
+#ifndef MAP_CELL_H
+#define MAP_CELL_H
 
 #include <cstddef>
 #include <utility>
 #include <string>
 
 using namespace std;
-class Map {
+class MapCell {
     private:
         static const size_t LENGTH = 55;
         static const size_t WIDTH = 20;
@@ -21,7 +21,7 @@ class Map {
 
 
     public:
-        Map(string path);
+        MapCell(string path);
 
         void display();
 
