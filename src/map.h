@@ -14,7 +14,7 @@ class Map {
 
         pair<size_t, size_t> start;
         pair<size_t, size_t> end;
-        pair<size_t, size_t> playerPosition = make_pair(9, 5);
+        pair<size_t, size_t> playerPosition;
 
         bool createMap(string path);
         void fillRow(string line, size_t row);

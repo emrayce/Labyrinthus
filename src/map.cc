@@ -10,6 +10,7 @@ using namespace std;
 Map::Map(string path) {
     createMap(path);
     playerPosition = make_pair(5, 14);
+    map[5][14] = 'P';
 }
 
 void Map::display() {
