@@ -53,19 +53,17 @@ bool MapCell::createMap(string path) {
 
     size_t row = 0;
 
-    while (cell.good() && row < 22) {
-        string line = "";
-
+    string line = "";
+    getline(cell, line);
+    getline(cell, line);
+    while (cell.good() && row < WIDTH) {
         getline(cell, line);
-
-        if (row == 0 || row == 1) {
-            row++;
-            continue;
-        }
 
         if (line.size() != 55)
         {
-            cout << "file: " << path <<  " | row: " << row << " | line size: " << line.size() << endl;
+            cout << line << endl;
+            cout << "file: " << path <<  " | row: " << row
+                 << " | line size: " << line.size() << endl;
             return false;
         }
 
@@ -73,7 +71,7 @@ bool MapCell::createMap(string path) {
         row++;
     }
 
-    return row == 21;
+    return row == WIDTH;
 }
 
 void MapCell::fillRow(string line, size_t row) {
