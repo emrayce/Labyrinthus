@@ -8,11 +8,11 @@
 using namespace std;
 
 MapCell::MapCell() {
-    for (size_t i = 0; i < WIDTH; i++) {
+    /*for (size_t i = 0; i < WIDTH; i++) {
         for (size_t j = 0; j < LENGTH; j++) {
             map[i][j] = ' ';
         }
-    }
+    }*/
 }
 
 MapCell::MapCell(string path) {
@@ -78,7 +78,7 @@ bool MapCell::createMap(string path) {
 
 void MapCell::fillRow(string line, size_t row) {
     for (size_t i = 0; i < line.size(); i++) {
-        map[row][i] = line[i];
+       map[row][i] = line[i];
     }
 }
 

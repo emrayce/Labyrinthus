@@ -11,13 +11,18 @@ using namespace std;
 using namespace std::filesystem;
 
 Map::Map(string path) {
+    cout << path << endl;
+    map[0][0] = MapCell("MapTest/test00.map");
+    cout << "wtf" << endl;
+}
+/*Map::Map(string path) {
     for (auto& file : directory_iterator(path)) {
         pair<size_t,size_t> index = getIndexFromFile(file.path());
         map[index.first][index.second] = MapCell(file.path());
     }
 
     cout << "wtf" << endl;
-}
+}*/
 
 // Get the index where the corresponding cellMap should be in map[][]
 pair<size_t,size_t> Map::getIndexFromFile(string path) {

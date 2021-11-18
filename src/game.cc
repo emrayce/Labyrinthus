@@ -9,13 +9,14 @@ using namespace std;
 Game::Game(string path) {
     playerMapCell = make_pair(0, 0);
     playerPosition = make_pair(15, 15);
-    gameMap = new Map(path);
+    MapCell cell("MapTest/test00.map");
+    //gameMap = new Map(path);
     cout << "prout" << endl;
-    unitMap = new MapCell("Map/unit.map");
+    /*unitMap = new MapCell("Map/unit.map");
     cout << "fcs" << endl;
     unitMap->setChar(15, 15, 'P');
 
-    cout << "hi" << endl;
+    cout << "hi" << endl;*/
 }
 
 void Game::movePlayer(int x, int y) {
