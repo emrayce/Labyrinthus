@@ -7,14 +7,21 @@
 
 using namespace std;
 
+MapCell::MapCell() {
+    for (size_t i = 0; i < WIDTH; i++) {
+        for (size_t j = 0; j < LENGTH; j++) {
+            map[i][j] = ' ';
+        }
+    }
+}
+
 MapCell::MapCell(string path) {
+    cout << path << endl;
     createMap(path);
-    playerPosition = make_pair(5, 14);
-    map[5][14] = 'P';
 }
 
 void MapCell::display() {
-    //clear screen and set curso to row1 col1
+    //clear screen and set cursor to row1 col1
     cout << "\033[2J\033[1;1H";
 
     string displayed = "";
@@ -39,29 +46,26 @@ bool MapCell::isPositionValid(size_t line, size_t col) {
     return true;
 }
 
-void MapCell::movePlayer(size_t line, size_t col) {
-    map[playerPosition.first][playerPosition.second] = ' ';
-    playerPosition.first = line;
-    playerPosition.second = col;
-    map[playerPosition.first][playerPosition.second] = 'P';
-}
-
 // return false if an error occured
 // true otherwise
 bool MapCell::createMap(string path) {
-    cout << path;
     ifstream cell(path);
 
     size_t row = 0;
 
-    while (cell.good() && row < 21) {
+    while (cell.good() && row < 22) {
         string line = "";
 
         getline(cell, line);
 
+        if (row == 0 || row == 1) {
+            row++;
+            continue;
+        }
+
         if (line.size() != 55)
         {
-            cout << line.size() << endl;
+            cout << "file: " << path <<  " | row: " << row << " | line size: " << line.size() << endl;
             return false;
         }
 
@@ -75,6 +79,20 @@ bool MapCell::createMap(string path) {
 void MapCell::fillRow(string line, size_t row) {
     for (size_t i = 0; i < line.size(); i++) {
         map[row][i] = line[i];
-        cout << line[i];
     }
+}
+
+void MapCell::setChar(size_t row, size_t col, char c) {
+    if (row >= 0 && row < WIDTH && col >= 0 && col <= LENGTH) {
+        map[row][col] = c;
+    }
+}
+
+char MapCell::getChar(size_t row, size_t col) {
+    if (row >= 0 && row < WIDTH && col >= 0 && col <= LENGTH) {
+        return map[row][col];
+    }
+
+    return 'E';
+
 }

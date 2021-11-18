@@ -7,22 +7,33 @@
 using namespace std;
 
 Game::Game(string path) {
-    map = new MapCell(path);
+    playerMapCell = make_pair(0, 0);
+    playerPosition = make_pair(15, 15);
+    gameMap = new Map(path);
+    cout << "prout" << endl;
+    unitMap = new MapCell("Map/unit.map");
+    cout << "fcs" << endl;
+    unitMap->setChar(15, 15, 'P');
+
+    cout << "hi" << endl;
 }
 
 void Game::movePlayer(int x, int y) {
 #include "player.h"
-    size_t newPosX = map->getPlayerPosition().first + x;
-    size_t newPosY = map->getPlayerPosition().second + y;
+    size_t newPosX = playerPosition.first + x;
+    size_t newPosY = playerPosition.second + y;
 
-    if (map->isPositionValid(newPosX, newPosY)) {
-        map->movePlayer(newPosX, newPosY);
+    MapCell cell = gameMap->getCell(playerMapCell.first, playerMapCell.second);
+
+    if (cell.isPositionValid(newPosX, newPosY)) {
+        playerPosition.first = newPosX;
+        playerPosition.second = newPosY;
     }
 }
 
 // the game loop where input are taken and game is played
 void Game::gameLoop() {
-    map->display();
+    /*display();
     bool win = false;
     while (!win) {
         char input = ' ';
@@ -44,13 +55,23 @@ void Game::gameLoop() {
                 break;
         }
 
-        
-        if (map->getPlayerPosition() == map->getEndPosition()) {
-            win = true;
-            break;
+        display();
+    }*/
+}
+
+void Game::display() {
+    MapCell cell = gameMap->getCell(playerMapCell.first, playerMapCell.second);
+    string displayed = "";
+
+    for (size_t i = 0; i < 20; i++) {
+        for (size_t j = 0; j < 55; j++) {
+            if (unitMap->getChar(i, j) != ' ') {
+                displayed += unitMap->getChar(i,j);
+            }
+            else {
+                displayed += cell.getChar(i, j);
+            }
         }
-
-        map->display();
+        displayed += '\n';
     }
-
 }
