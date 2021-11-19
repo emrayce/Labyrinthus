@@ -39,6 +39,7 @@ void Game::gameLoop() {
 
         switch (input) {
             case 'w':
+                cout << "hi?" << endl;
                 movePlayer(-1, 0);
                 break;
             case 's':
@@ -57,6 +58,9 @@ void Game::gameLoop() {
 }
 
 void Game::display() {
+    //clear screen and set cursor to row1 col1
+    cout << "\033[2J\033[1;1H";
+
     MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
     string displayed = "";
 
@@ -71,4 +75,5 @@ void Game::display() {
         }
         displayed += '\n';
     }
+    cout << displayed << endl;
 }
