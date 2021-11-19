@@ -10,10 +10,10 @@ using namespace std;
 
 class Game {
     private:
-        Map* gameMap;               // Entire map of the game
+        Map gameMap;               // Entire map of the game
 
         // Map where player and pnj move
-        MapCell* unitMap;
+        MapCell unitMap;
 
         // Get The player position on unitMap
         pair<size_t, size_t> playerPosition;

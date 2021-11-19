@@ -9,20 +9,18 @@ using namespace std;
 Game::Game(string path) {
     playerMapCell = make_pair(0, 0);
     playerPosition = make_pair(15, 15);
-    MapCell cell("MapTest/test00.map");
-    gameMap = new Map(path);
-    cout << "prout" << endl;
-    unitMap = new MapCell("Map/unit.map");
-    cout << "fcs" << endl;
-    unitMap->setChar(15, 15, 'P');
+
+    gameMap = Map(path);
+
+    unitMap = MapCell("Map/unit.map");
+    unitMap.setChar(15, 15, 'P');
 }
 
 void Game::movePlayer(int x, int y) {
-#include "player.h"
     size_t newPosX = playerPosition.first + x;
     size_t newPosY = playerPosition.second + y;
 
-    MapCell cell = gameMap->getCell(playerMapCell.first, playerMapCell.second);
+    MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
 
     if (cell.isPositionValid(newPosX, newPosY)) {
         playerPosition.first = newPosX;
@@ -59,13 +57,13 @@ void Game::gameLoop() {
 }
 
 void Game::display() {
-    MapCell cell = gameMap->getCell(playerMapCell.first, playerMapCell.second);
+    MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
     string displayed = "";
 
     for (size_t i = 0; i < 20; i++) {
         for (size_t j = 0; j < 55; j++) {
-            if (unitMap->getChar(i, j) != ' ') {
-                displayed += unitMap->getChar(i,j);
+            if (unitMap.getChar(i, j) != ' ') {
+                displayed += unitMap.getChar(i,j);
             }
             else {
                 displayed += cell.getChar(i, j);

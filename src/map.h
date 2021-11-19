@@ -18,6 +18,7 @@ class Map {
         pair<size_t,size_t> getIndexFromFile(string path);
 
     public:
+        Map();
         Map(string path);
 
         MapCell getCell(size_t row, size_t col) { return map[row][col]; }
