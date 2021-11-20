@@ -13,7 +13,7 @@ class Map {
         static const size_t LENGTH = 2;
         static const size_t WIDTH = 2;
 
-        MapCell map[WIDTH][LENGTH];
+        array<MapCell, LENGTH * WIDTH> map;
 
         pair<size_t,size_t> getIndexFromFile(string path);
 
@@ -21,7 +21,7 @@ class Map {
         Map();
         Map(string path);
 
-        MapCell getCell(size_t row, size_t col) { return map[row][col]; }
+        MapCell getCell(size_t row, size_t col) { return map.at(row * LENGTH + col); }
 };
 
 #endif

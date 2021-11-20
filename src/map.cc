@@ -17,7 +17,7 @@ Map::Map() {
 Map::Map(string path) {
     for (auto& file : directory_iterator(path)) {
         pair<size_t,size_t> index = getIndexFromFile(file.path());
-        map[index.first][index.second] = MapCell(file.path());
+        map.at(index.first * LENGTH + index.second) = MapCell(file.path());
     }
 }
 
