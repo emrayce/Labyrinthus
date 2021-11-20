@@ -4,13 +4,14 @@
 #include <cstddef>
 #include <utility>
 #include <string>
+#include <array>
 
 using namespace std;
 class MapCell {
     private:
         static const size_t LENGTH = 55;
         static const size_t WIDTH = 20;
-        char map[WIDTH][LENGTH];
+        array<char, WIDTH * LENGTH> map;
 
         bool createMap(string path);
         void fillRow(string line, size_t row);
@@ -26,9 +27,8 @@ class MapCell {
         // valid position are:
         //      cells inside SIZE range
         //      empty cell
-        bool isPositionValid(size_t line, size_t col);
+        bool isPositionValid(size_t row, size_t col);
 
-        void movePlayer(size_t line, size_t col);
         void setChar(size_t row, size_t col, char c);
         char getChar(size_t row, size_t col);
 

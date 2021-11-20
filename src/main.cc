@@ -9,5 +9,4 @@ int main() {
     game.gameLoop();
 
     return 0;
-
 }

@@ -16,7 +16,6 @@ MapCell::MapCell() {
 }
 
 MapCell::MapCell(string path) {
-    cout << path << endl;
     createMap(path);
 }
 
@@ -27,7 +26,7 @@ void MapCell::display() {
     string displayed = "";
     for (size_t i = 0; i < WIDTH; i++) {
         for (size_t j = 0; j < LENGTH; j++) {
-            displayed+= map[i][j];
+            displayed += map.at(i * LENGTH + j);
         }
         displayed += '\n';
     }
@@ -35,11 +34,11 @@ void MapCell::display() {
     cout << displayed << endl;
 }
 
-bool MapCell::isPositionValid(size_t line, size_t col) {
-    if (line >= WIDTH || col >= LENGTH) {
+bool MapCell::isPositionValid(size_t row, size_t col) {
+    if (row >= WIDTH || col >= LENGTH) {
         return false;
     }
-    if (map[line][col] == '#') {
+    if (map.at(row * LENGTH + col) == '#') {
         return false;
     }
     
@@ -76,21 +75,18 @@ bool MapCell::createMap(string path) {
 
 void MapCell::fillRow(string line, size_t row) {
     for (size_t i = 0; i < line.size(); i++) {
-       map[row][i] = line[i];
+       map.at(row * LENGTH + i) = line[i];
     }
 }
 
 void MapCell::setChar(size_t row, size_t col, char c) {
     if (row >= 0 && row < WIDTH && col >= 0 && col <= LENGTH) {
-        map[row][col] = c;
+        map.at(row * LENGTH + col) = c;
     }
 }
 
 char MapCell::getChar(size_t row, size_t col) {
-    if (row >= 0 && row < WIDTH && col >= 0 && col <= LENGTH) {
-        return map[row][col];
-    }
+    return map.at(row * LENGTH + col);
 
     return 'E';
-
 }

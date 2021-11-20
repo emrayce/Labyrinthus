@@ -39,7 +39,6 @@ void Game::gameLoop() {
 
         switch (input) {
             case 'w':
-                cout << "hi?" << endl;
                 movePlayer(-1, 0);
                 break;
             case 's':
