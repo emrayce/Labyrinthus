@@ -23,8 +23,12 @@ void Game::movePlayer(int x, int y) {
     MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
 
     if (cell.isPositionValid(newPosX, newPosY)) {
+        unitMap.setChar(playerPosition.first, playerPosition.second, ' ');
+
         playerPosition.first = newPosX;
         playerPosition.second = newPosY;
+
+        unitMap.setChar(playerPosition.first, playerPosition.second, 'P');
     }
 }
 
