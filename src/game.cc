@@ -8,16 +8,16 @@ using namespace std;
 
 Game::Game(string path) {
     playerMapCell = make_pair(0, 0);
-    playerPosition = make_pair(15, 15);
+    playerPosition = make_pair(19, 22);
 
     gameMap = Map(path);
 
     unitMap = MapCell("Map/unit.map");
-    unitMap.setChar(15, 15, 'P');
+    unitMap.setChar(playerPosition.first, playerPosition.second, 'P');
 }
 
 bool Game::cellChangeNeeded(size_t row, size_t line) {
-    return x < row || row >= WIDTH || line < 0 || line >= LENGTH;
+    return row >= WIDTH || line >= LENGTH;
 }
 
 
@@ -28,11 +28,14 @@ void Game::movePlayer(int x, int y) {
     MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
 
     if (cellChangeNeeded(newPosX, newPosY)) {
-        changeMap(newPosX, newPosY);
+        unitMap.setChar(playerPosition.first, playerPosition.second, ' ');
+        debug = true;
+        changeMap();
         setIndexPlayerOnNewCell();
     }
 
     else if (cell.isPositionValid(newPosX, newPosY)) {
+        debug = false;
         unitMap.setChar(playerPosition.first, playerPosition.second, ' ');
 
         playerPosition.first = newPosX;
@@ -44,34 +47,42 @@ void Game::movePlayer(int x, int y) {
     unitMap.setChar(playerPosition.first, playerPosition.second, 'P');
 }
 
-void Game::changeMap(size_t x, size_t y) {
-    if (x < 0) {
-        playerMapCell.first -= - 1;
+void Game::changeMap() {
+    if (playerPosition.first == 0) {
+        playerMapCell.first -= 1;
     }
-    if (x >= WIDTH) {
+    if (playerPosition.first >= WIDTH - 1) {
         playerMapCell.first += 1;
     }
 
-    if (y < 0) {
+    if (playerPosition.second == 0) {
         playerMapCell.second -= 1;
     }
-    if (y >= LENGTH) {
+    if (playerPosition.second >= LENGTH - 1) {
         playerMapCell.second += 1;
     }
 }
 
 void Game::setIndexPlayerOnNewCell() {
     if (playerPosition.first == 0) {
-        playerPosition.first = LENGTH - 1;
+        cout << "hi" << endl;
+        playerPosition.first = WIDTH - 1;
+    }
+    else if (playerPosition.first == WIDTH - 1) {
+        cout << "ho" << endl;
         playerPosition.first = 0;
     }
 
     if (playerPosition.second == 0) {
-        playerPosition.second = WIDTH - 1;
+        cout << "hu" << endl;
+        playerPosition.second = LENGTH - 1;
     }
-    if (playerPosition.second == WIDTH - 1) {
+    else if (playerPosition.second == LENGTH - 1) {
+        cout << "hy" << endl;
         playerPosition.second = 0;
     }
+
+    cout << "Player x: " << playerPosition.first << " Player y: " << playerPosition.second << endl;
 }
 
 // the game loop where input are taken and game is played
@@ -123,4 +134,5 @@ void Game::display() {
     cout << displayed << endl;
 
     cout << "x: " << playerPosition.first << " y: " << playerPosition.second << endl;
+    cout << "Change map: " << debug << endl;
 }

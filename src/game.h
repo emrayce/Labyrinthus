@@ -13,6 +13,8 @@ class Game {
         static const size_t LENGTH = 55;
         static const size_t WIDTH = 20;
 
+        bool debug = true;
+
         Map gameMap;               // Entire map of the game
 
         // Map where player and pnj move
@@ -23,7 +25,7 @@ class Game {
         // Get the cell index on the GameMap
         pair<size_t, size_t> playerMapCell;
 
-        void changeMap(size_t row, size_t line);
+        void changeMap();
         void setIndexPlayerOnNewCell();
         bool cellChangeNeeded(size_t x, size_t y);
 
