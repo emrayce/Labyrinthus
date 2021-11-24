@@ -4,10 +4,9 @@
 using namespace std;
 
 int main() {
-    Game game("Map/test.map");
+    Game game("MapTest/");
 
     game.gameLoop();
 
     return 0;
-
 }
