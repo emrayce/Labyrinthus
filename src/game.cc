@@ -16,19 +16,61 @@ Game::Game(string path) {
     unitMap.setChar(15, 15, 'P');
 }
 
+bool Game::cellChangeNeeded(size_t row, size_t line) {
+    return x < row || row >= WIDTH || line < 0 || line >= LENGTH;
+}
+
+
 void Game::movePlayer(int x, int y) {
     size_t newPosX = playerPosition.first + x;
     size_t newPosY = playerPosition.second + y;
 
     MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
 
-    if (cell.isPositionValid(newPosX, newPosY)) {
+    if (cellChangeNeeded(newPosX, newPosY)) {
+        changeMap(newPosX, newPosY);
+        setIndexPlayerOnNewCell();
+    }
+
+    else if (cell.isPositionValid(newPosX, newPosY)) {
         unitMap.setChar(playerPosition.first, playerPosition.second, ' ');
 
         playerPosition.first = newPosX;
         playerPosition.second = newPosY;
 
         unitMap.setChar(playerPosition.first, playerPosition.second, 'P');
+    }
+
+    unitMap.setChar(playerPosition.first, playerPosition.second, 'P');
+}
+
+void Game::changeMap(size_t x, size_t y) {
+    if (x < 0) {
+        playerMapCell.first -= - 1;
+    }
+    if (x >= WIDTH) {
+        playerMapCell.first += 1;
+    }
+
+    if (y < 0) {
+        playerMapCell.second -= 1;
+    }
+    if (y >= LENGTH) {
+        playerMapCell.second += 1;
+    }
+}
+
+void Game::setIndexPlayerOnNewCell() {
+    if (playerPosition.first == 0) {
+        playerPosition.first = LENGTH - 1;
+        playerPosition.first = 0;
+    }
+
+    if (playerPosition.second == 0) {
+        playerPosition.second = WIDTH - 1;
+    }
+    if (playerPosition.second == WIDTH - 1) {
+        playerPosition.second = 0;
     }
 }
 
@@ -79,4 +121,6 @@ void Game::display() {
         displayed += '\n';
     }
     cout << displayed << endl;
+
+    cout << "x: " << playerPosition.first << " y: " << playerPosition.second << endl;
 }
