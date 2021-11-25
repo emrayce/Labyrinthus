@@ -13,9 +13,9 @@ class Map {
         static const size_t LENGTH = 2;
         static const size_t WIDTH = 2;
 
-        array<MapCell, LENGTH * WIDTH> map;
+        array<MapCell, LENGTH * WIDTH> map;                     // The entire map of the game
 
-        pair<size_t,size_t> getIndexFromFile(string path);
+        pair<size_t,size_t> getIndexFromFile(string path);      // Get the index of a cell from its file
 
     public:
         Map();

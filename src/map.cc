@@ -11,7 +11,6 @@ using namespace std;
 using namespace std::filesystem;
 
 Map::Map() {
-    
 }
 
 Map::Map(string path) {
