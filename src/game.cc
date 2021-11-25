@@ -79,9 +79,9 @@ void Game::setIndexPlayerOnNewCell() {
 
 // the game loop where input are taken and game is played
 void Game::gameLoop() {
-    display();
     bool win = false;
     while (!win) {
+        display();
         char input = ' ';
 
         cin >> input;
@@ -100,8 +100,6 @@ void Game::gameLoop() {
                 movePlayer(0, 1);
                 break;
         }
-
-        display();
     }
 }
 
