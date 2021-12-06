@@ -8,9 +8,9 @@ int main() {
     Game game("MapTest/");
 
     // Run
-    //game.gameLoop();
+    game.gameLoop();
     //
-   game.display();
+   //game.display();
 
     return 0;
 }

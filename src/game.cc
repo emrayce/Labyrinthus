@@ -30,27 +30,53 @@ bool Game::cellChangeNeeded(size_t row, size_t line) {
 
 
 void Game::movePlayer(int row, int col) {
+    // create the theorical new position
     size_t newPosX = playerPosition.first + row;
     size_t newPosY = playerPosition.second + col;
 
+    // get the cell for renderer
     MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
 
+    // If we need to change MapCell
+    // Find the index ofthe new cell
+    // Then find the position of the player on the new cell
     if (cellChangeNeeded(newPosX, newPosY)) {
         unitMap.setChar(playerPosition.first, playerPosition.second, ' ');
+
+        // TODO use something different than playerPosition when sprite on several pixel will be implemented
+        renderer.setPixel(playerPosition.first, playerPosition.second, renderer.createPixel(' '));
+
         changeMap();
         setIndexPlayerOnNewCell();
+
+        renderer.setScreenFromMapCell(gameMap.getCell(playerMapCell.first, playerMapCell.second));
+
+        // Set the player on unitMap with the new position
+        unitMap.setChar(playerPosition.first, playerPosition.second, 'P');
+
+        // Set the pixels corresponding to the player on the renderer
+        renderer.setPlayer(playerPosition.first, playerPosition.second);
     }
 
+    // Check if the position is valid
+    // If it's the case then remove old player's position from unitMap
+    // Set up the new position
+    // Set the player on the unitMap with the new position
     else if (cell.isPositionValid(newPosX, newPosY)) {
         unitMap.setChar(playerPosition.first, playerPosition.second, ' ');
+
+        // TODO use something different than playerPosition when sprite on several pixel will be implemented
+        renderer.setPixel(playerPosition.first, playerPosition.second, renderer.createPixel(' '));
 
         playerPosition.first = newPosX;
         playerPosition.second = newPosY;
 
+        // Set the player on unitMap with the new position
         unitMap.setChar(playerPosition.first, playerPosition.second, 'P');
-    }
 
-    unitMap.setChar(playerPosition.first, playerPosition.second, 'P');
+        // Set the pixels corresponding to the player on the renderer
+        renderer.setPlayer(playerPosition.first, playerPosition.second);
+    }
 }
 
 void Game::changeMap() {
