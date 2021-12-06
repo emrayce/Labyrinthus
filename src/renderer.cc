@@ -8,13 +8,16 @@ string Renderer::createPixel(char c) {
     string pixel = "";
     switch (c) {
         case '#':
-            pixel += "22-0-0";
+            pixel += "22-0- ";
             break;
         case ' ':
-            pixel += "209-0-0";
+            pixel += "209-0- ";
+            break;
+        case 'P':
+            pixel += "0-2-P";
             break;
         default:
-            pixel += "255-0-0";
+            pixel += "255-0- ";
     }
 
     return pixel;

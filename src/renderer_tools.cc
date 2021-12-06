@@ -16,7 +16,7 @@ string Renderer::resetFlags() {
     return flags;
 }
 
-// Reset the cursor position to 22;0
+// Reset the cursor position to 22;0 after the map display
 string Renderer::resetCursor() {
     string cursor = ESC + to_string(DEFAULT_ROW) + ";0H";
     cout << ESC << DEFAULT_ROW << ";0H";
@@ -87,4 +87,13 @@ void Renderer::setPixel(size_t row, size_t col, string pixel) {
 
 string Renderer::getPixel(size_t row, size_t col) {
     return screen.at(row * LENGTH + col);
+}
+
+// Delete line specified by row
+string Renderer::deleteLine(size_t row) {
+    string del = ESC + to_string(row) + ";0H";
+    del += ESC + "2K";
+    cout << ESC << row << ";0H" << ESC << "2K";
+
+    return del;
 }

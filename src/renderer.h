@@ -17,7 +17,7 @@ class Renderer {
 
         // matrix of all pixels that will be display to the terminals
         // A "pixel" (case of the array) will contain a string in the following format
-        // 255-255-255
+        // 255-255-C  where c is an ascii character 
         // background color - foreground color - ascii character
 
         array<string, LENGTH * WIDTH> screen;
@@ -31,6 +31,8 @@ class Renderer {
 
         string resetFlags();
         string resetCursor();
+
+        string deleteLine(size_t row);
 
     public:
 
