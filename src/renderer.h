@@ -43,8 +43,12 @@ class Renderer {
         void setScreenFromMapCell(MapCell mapCell);
         string createPixel(char c);
 
+        void setPlayer(size_t row, size_t col);
+
         void displayLine(size_t row);
         void display();
+
+        void debug();
 };
 
 #endif

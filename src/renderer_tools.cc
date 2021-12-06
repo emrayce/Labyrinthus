@@ -35,7 +35,6 @@ string Renderer::getBgColor(string pixel) {
     size_t pos = pixel.find("-");
 
     string background = pixel.substr(0, pos);
-    //cout << background << endl;
 
     return background;
 }
@@ -96,4 +95,14 @@ string Renderer::deleteLine(size_t row) {
     cout << ESC << row << ";0H" << ESC << "2K";
 
     return del;
+}
+
+
+void Renderer::debug() {
+    for (size_t row = 0; row < WIDTH; row++) {
+        for (size_t col = 0; col < LENGTH; col++) {
+            cout << getPixel(row, col) << "|";
+        }
+        cout << endl;
+    }
 }

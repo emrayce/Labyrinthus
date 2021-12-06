@@ -15,6 +15,13 @@ Game::Game(string path) {
 
     unitMap = MapCell("Map/unit.map");
     unitMap.setChar(playerPosition.first, playerPosition.second, 'P');
+
+
+    MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
+
+    renderer.setScreenFromMapCell(cell);
+
+    renderer.setPlayer(playerPosition.first, playerPosition.second);
 }
 
 bool Game::cellChangeNeeded(size_t row, size_t line) {
@@ -126,8 +133,6 @@ void Game::gameLoop() {
 }
 */
 void Game::display() {
-    MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
-
-    renderer.setScreenFromMapCell(cell);
+    //renderer.debug();
     renderer.display();
 }

@@ -32,6 +32,12 @@ void Renderer::setScreenFromMapCell(MapCell mapCell) {
     }
 }
 
+void Renderer::setPlayer(size_t row, size_t col) {
+    string pixel_player = createPixel('P');
+
+    setPixel(row, col, pixel_player);
+}
+
 
 void Renderer::displayLine(size_t row) {
     string to_display = "";
@@ -40,7 +46,7 @@ void Renderer::displayLine(size_t row) {
 
     for (size_t col = 0; col < LENGTH; col++) {
         string bgColor = getBgColor(getPixel(row, col));
-        string fgColor = getBgColor(getPixel(row, col));
+        string fgColor = getFgColor(getPixel(row, col));
         string ascii = getAsciiChar(getPixel(row, col));
 
         to_display += setBgColor(bgColor);

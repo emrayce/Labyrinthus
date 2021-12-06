@@ -10,7 +10,7 @@ int main() {
     // Run
     //game.gameLoop();
     //
-    game.display();
+   game.display();
 
     return 0;
 }
