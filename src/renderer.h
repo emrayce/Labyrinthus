@@ -16,8 +16,6 @@ class Renderer {
         static const size_t DEFAULT_ROW = 22;               // Row where we can safely take input
         string ESC = "\x1b[";                  // Basis of every ANSI escape code
 
-        struct termios orig_termios;                        // Store the original config of the terminal
-
 
         // matrix of all pixels that will be display to the terminals
         // A "pixel" (case of the array) will contain a string in the following format
