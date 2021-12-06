@@ -33,6 +33,7 @@ string Renderer::getBgColor(string pixel) {
     return background;
 }
 
+
 string Renderer::getFgColor(string pixel) {
     size_t pos1 = pixel.find("-");
     size_t pos2 = pixel.rfind("-");
@@ -42,6 +43,7 @@ string Renderer::getFgColor(string pixel) {
     return foreground;
 }
 
+
 string Renderer::getAsciiChar(string pixel) {
     size_t pos = pixel.rfind("-");
 
@@ -49,6 +51,7 @@ string Renderer::getAsciiChar(string pixel) {
 
     return ascii;
 }
+
 
 /*
 * The following 2 methods are used to set up pixel data:
@@ -59,9 +62,11 @@ void Renderer::setBgColor(string colorID) {
     cout << ESC << "48;5;" << colorID << "m";
 }
 
+
 void Renderer::setFgColor(string colorID) {
     cout << ESC << "38;5;" << colorID << "m";
 }
+
 
 // GETTER SETTER FOR SCREEN
 void Renderer::setPixel(size_t row, size_t col, string pixel) {
@@ -70,21 +75,13 @@ void Renderer::setPixel(size_t row, size_t col, string pixel) {
     }
 }
 
+
 string Renderer::getPixel(size_t row, size_t col) {
     return screen.at(row * LENGTH + col);
 }
 
+
 // Delete line specified by row
 void Renderer::deleteLine(size_t row) {
     cout << ESC << row + 1<< ";0H" << ESC << "2K";
-}
-
-
-void Renderer::debug() {
-    for (size_t row = 0; row < WIDTH; row++) {
-        for (size_t col = 0; col < LENGTH; col++) {
-            cout << getPixel(row, col) << "|";
-        }
-        cout << endl;
-    }
 }

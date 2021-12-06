@@ -1,24 +1,10 @@
 #include "renderer.h"
 
-#include <unistd.h>
 #include <iostream>
 
 using namespace std;
 
-// Disable raw mode by resetting the original terminal
-void Renderer::disableRawMode() {
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
-}
 
-// Set raw mode for the terminal
-// Disable ECHO and canonical mode
-void Renderer::enableRawMode() {
-    tcgeattr(STDIN_FILENO, &orig_termios);
-    atexit(disableRawMode);
-    struct termios raw = orig_termios;
-    raw.c_lflag &= ~(ECHO | ICANON);
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
-}
 
 string Renderer::createPixel(char c) {
     string pixel = "";
@@ -39,6 +25,7 @@ string Renderer::createPixel(char c) {
     return pixel;
 }
 
+
 void Renderer::setScreenFromMapCell(MapCell mapCell) {
     for (size_t row = 0; row < WIDTH; row++) {
         for (size_t col = 0; col < LENGTH; col++) {
@@ -47,6 +34,7 @@ void Renderer::setScreenFromMapCell(MapCell mapCell) {
         }
     }
 }
+
 
 void Renderer::setPlayer(size_t row, size_t col) {
     string pixel_player = createPixel('P');
@@ -72,6 +60,7 @@ void Renderer::displayLine(size_t row) {
 
     resetFlags();
 }
+
 
 void Renderer::display() {
     cout << ESC << "2J";

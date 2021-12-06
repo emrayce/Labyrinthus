@@ -4,19 +4,20 @@
 #include "map_cell.h"
 
 #include <iostream>
-#include <termios.h>
 
 using namespace std;
 
 class Renderer {
+    // PRIVATE ATTRIBUTES
     private:
+        // Dimensions of screen
         static const size_t WIDTH = 20;
         static const size_t LENGTH = 55;
+        static const size_t DEFAULT_ROW = 22;               // Row where we can safely take input
+        string ESC = "\x1b[";                  // Basis of every ANSI escape code
 
-        struct termios orig_termios;
+        struct termios orig_termios;                        // Store the original config of the terminal
 
-        string ESC = "\x1b[";
-        size_t DEFAULT_ROW = 22;
 
         // matrix of all pixels that will be display to the terminals
         // A "pixel" (case of the array) will contain a string in the following format
@@ -25,36 +26,35 @@ class Renderer {
 
         array<string, LENGTH * WIDTH> screen;
 
-        string getBgColor(string pixel);
-        string getFgColor(string pixel);
-        string getAsciiChar(string pixel);
+    // PRIVATE METHODS
+    private:
 
-        void setBgColor(string);
-        void setFgColor(string);
+        string getBgColor(string pixel);                    // Retrieve Background color from pixel
+        string getFgColor(string pixel);                    // Retrieve Foreground color from pixel
+        string getAsciiChar(string pixel);                  // Retrieve Ascii character from pixel
 
-        void resetFlags();
-        void resetCursor();
+        void setBgColor(string colorID);                    // Set colorID as the background color
+        void setFgColor(string colorID);                    // Set colorID as the foreground color
 
-        void deleteLine(size_t row);
+        void resetFlags();                                  // Reset all flags
+        void resetCursor();                                 // Put the cursor at DEFAULT_ROW
 
-        void enableRawMode();
-        void disableRawMode();
+        void deleteLine(size_t row);                        // Delete line row
 
+    // PUBLIC METHODS
     public:
 
-        // Getter/Setter of pixel of screen
-        void setPixel(size_t row, size_t col, string pixel);
-        string getPixel(size_t row, size_t col);
+        void setPixel(size_t row, size_t col, string pixel);    // Pixel setter of screen
+        string getPixel(size_t row, size_t col);                // Pixel getter of screen
 
-        void setScreenFromMapCell(MapCell mapCell);
-        string createPixel(char c);
+        string createPixel(char c);                             // Create a pixel from input
 
-        void setPlayer(size_t row, size_t col);
+        void setScreenFromMapCell(MapCell mapCell);             // Create screen from MapCell
 
-        void displayLine(size_t row);
-        void display();
+        void setPlayer(size_t row, size_t col);                 // Set the player on screen
 
-        void debug();
+        void displayLine(size_t row);                           // Display line row of screen
+        void display();                                         // Method to call to display screen
 };
 
 #endif
