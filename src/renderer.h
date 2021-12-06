@@ -13,6 +13,7 @@ class Renderer {
         static const size_t LENGTH = 55;
 
         string ESC = "\x1b[";
+        size_t DEFAULT_ROW = 22;
 
         // matrix of all pixels that will be display to the terminals
         // A "pixel" (case of the array) will contain a string in the following format
@@ -21,14 +22,15 @@ class Renderer {
 
         array<string, LENGTH * WIDTH> screen;
 
-        string getBackgroundColor(string pixel);
-        string getForeGroundColor(string pixel);
+        string getBgColor(string pixel);
+        string getFgColor(string pixel);
         string getAsciiChar(string pixel);
 
         string setBgColor(string);
         string setFgColor(string);
 
         string resetFlags();
+        string resetCursor();
 
     public:
 
