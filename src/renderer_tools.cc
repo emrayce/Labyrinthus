@@ -9,19 +9,13 @@
 using namespace std;
 
 // Reset all flags (eg: fg/bg color)
-string Renderer::resetFlags() {
-    string flags = ESC + "0m";
+void Renderer::resetFlags() {
     cout << ESC << "0m";
-
-    return flags;
 }
 
 // Reset the cursor position to 22;0 after the map display
-string Renderer::resetCursor() {
-    string cursor = ESC + to_string(DEFAULT_ROW) + ";0H";
+void Renderer::resetCursor() {
     cout << ESC << DEFAULT_ROW << ";0H";
-
-    return cursor;
 }
 
 
@@ -61,20 +55,12 @@ string Renderer::getAsciiChar(string pixel) {
 *       - Background color
 *       - Foreground color
 */
-string Renderer::setBgColor(string colorID) {
-    string bgColor = "";
-    bgColor += ESC + "48;5;" + colorID + "m";
-
+void Renderer::setBgColor(string colorID) {
     cout << ESC << "48;5;" << colorID << "m";
-    return bgColor;
 }
 
-string Renderer::setFgColor(string colorID) {
-    string fgColor = ESC + "38;5;" + colorID + "m";
-
+void Renderer::setFgColor(string colorID) {
     cout << ESC << "38;5;" << colorID << "m";
-
-    return fgColor;
 }
 
 // GETTER SETTER FOR SCREEN
@@ -89,12 +75,8 @@ string Renderer::getPixel(size_t row, size_t col) {
 }
 
 // Delete line specified by row
-string Renderer::deleteLine(size_t row) {
-    string del = ESC + to_string(row) + ";0H";
-    del += ESC + "2K";
-    cout << ESC << row << ";0H" << ESC << "2K";
-
-    return del;
+void Renderer::deleteLine(size_t row) {
+    cout << ESC << row + 1<< ";0H" << ESC << "2K";
 }
 
 

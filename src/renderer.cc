@@ -14,7 +14,7 @@ string Renderer::createPixel(char c) {
             pixel += "209-0- ";
             break;
         case 'P':
-            pixel += "0-2-P";
+            pixel += "2-0- ";
             break;
         default:
             pixel += "255-0- ";
@@ -49,20 +49,18 @@ void Renderer::displayLine(size_t row) {
         string fgColor = getFgColor(getPixel(row, col));
         string ascii = getAsciiChar(getPixel(row, col));
 
-        to_display += setBgColor(bgColor);
-        to_display += setFgColor(fgColor);
-        to_display += ascii;
+        setBgColor(bgColor);
+        setFgColor(fgColor);
         cout << ascii;
     }
 
     resetFlags();
-
-    //cout << to_display;
 }
 
 void Renderer::display() {
     cout << ESC << "2J";
     for (size_t row = 0; row < WIDTH; row++) {
+        deleteLine(row);
         displayLine(row);
     }
 

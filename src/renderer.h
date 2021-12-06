@@ -26,13 +26,13 @@ class Renderer {
         string getFgColor(string pixel);
         string getAsciiChar(string pixel);
 
-        string setBgColor(string);
-        string setFgColor(string);
+        void setBgColor(string);
+        void setFgColor(string);
 
-        string resetFlags();
-        string resetCursor();
+        void resetFlags();
+        void resetCursor();
 
-        string deleteLine(size_t row);
+        void deleteLine(size_t row);
 
     public:
 
