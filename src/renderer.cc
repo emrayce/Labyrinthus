@@ -1,8 +1,24 @@
 #include "renderer.h"
 
+#include <unistd.h>
 #include <iostream>
 
 using namespace std;
+
+// Disable raw mode by resetting the original terminal
+void Renderer::disableRawMode() {
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+}
+
+// Set raw mode for the terminal
+// Disable ECHO and canonical mode
+void Renderer::enableRawMode() {
+    tcgeattr(STDIN_FILENO, &orig_termios);
+    atexit(disableRawMode);
+    struct termios raw = orig_termios;
+    raw.c_lflag &= ~(ECHO | ICANON);
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+}
 
 string Renderer::createPixel(char c) {
     string pixel = "";

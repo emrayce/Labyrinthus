@@ -4,6 +4,7 @@
 #include "map_cell.h"
 
 #include <iostream>
+#include <termios.h>
 
 using namespace std;
 
@@ -11,6 +12,8 @@ class Renderer {
     private:
         static const size_t WIDTH = 20;
         static const size_t LENGTH = 55;
+
+        struct termios orig_termios;
 
         string ESC = "\x1b[";
         size_t DEFAULT_ROW = 22;
@@ -33,6 +36,9 @@ class Renderer {
         void resetCursor();
 
         void deleteLine(size_t row);
+
+        void enableRawMode();
+        void disableRawMode();
 
     public:
 
