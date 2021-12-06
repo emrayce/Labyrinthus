@@ -19,7 +19,7 @@ void disableRawMode() {
 // Disable ICANON (canonical mode) allow to take input without pressing ENTER
 void enableRawMode() {
   tcgetattr(STDIN_FILENO, &orig_termios);
-  atexit(disableRawMode);                               // Call disableRawMode at the end of the program
+  atexit(disableRawMode);                           // Call disableRawMode at the end of the program
   struct termios raw = orig_termios;
   raw.c_lflag &= ~(ECHO | ICANON);
   tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
