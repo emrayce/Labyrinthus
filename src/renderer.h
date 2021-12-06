@@ -12,7 +12,7 @@ class Renderer {
         static const size_t WIDTH = 20;
         static const size_t LENGTH = 55;
 
-        string ESC = "\0x1b[";
+        string ESC = "\x1b[";
 
         // matrix of all pixels that will be display to the terminals
         // A "pixel" (case of the array) will contain a string in the following format
@@ -28,8 +28,9 @@ class Renderer {
         string setBgColor(string);
         string setFgColor(string);
 
+        string resetFlags();
+
     public:
-        Renderer();
 
         // Getter/Setter of pixel of screen
         void setPixel(size_t row, size_t col, string pixel);

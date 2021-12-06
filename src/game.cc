@@ -1,4 +1,5 @@
 #include "game.h"
+#include "renderer.h"
 
 #include <cstddef>
 #include <utility>
@@ -103,7 +104,7 @@ void Game::gameLoop() {
     }
 }
 
-void Game::display() {
+/*void Game::display() {
     //clear screen and set cursor to row1 col1
     cout << "\033[2J\033[1;1H";
 
@@ -122,4 +123,11 @@ void Game::display() {
         displayed += '\n';
     }
     cout << displayed << endl;
+}
+*/
+void Game::display() {
+    MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
+
+    renderer.setScreenFromMapCell(cell);
+    renderer.display();
 }
