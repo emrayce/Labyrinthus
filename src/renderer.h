@@ -4,6 +4,7 @@
 #include "map_cell.h"
 
 #include <iostream>
+#include <map>
 
 using namespace std;
 
@@ -23,6 +24,10 @@ class Renderer {
         // background color - foreground color - ascii character
 
         array<string, LENGTH * WIDTH> screen;
+
+        // Map of lines that we need to display
+        // 
+        map<size_t,char> to_display;
 
     // PRIVATE METHODS
     private:
@@ -53,6 +58,12 @@ class Renderer {
 
         void displayLine(size_t row);                           // Display line row of screen
         void display();                                         // Method to call to display screen
+
+        void insertLineToDisplay(size_t row);                   // Add a line to be displayed
+        void insertAllLinesToDisplay();                         // Insert all lines to be displayed
+        void cleanToDisplay();                                  // Reset to_display
+
+        void clearScreen();
 };
 
 #endif

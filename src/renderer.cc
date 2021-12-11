@@ -63,12 +63,16 @@ void Renderer::displayLine(size_t row) {
 
 
 void Renderer::display() {
-    cout << ESC << "2J";
-    for (size_t row = 0; row < WIDTH; row++) {
+    for (auto it = to_display.begin(); it != to_display.end(); it++) {
+        deleteLine(it->first);
+        displayLine(it->first);
+    }
+    /*for (size_t row = 0; row < WIDTH; row++) {
         deleteLine(row);
         displayLine(row);
-    }
+    }*/
 
     resetFlags();
     resetCursor();
+    cleanToDisplay();
 }

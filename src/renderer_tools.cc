@@ -85,3 +85,26 @@ string Renderer::getPixel(size_t row, size_t col) {
 void Renderer::deleteLine(size_t row) {
     cout << ESC << row + 1<< ";0H" << ESC << "2K";
 }
+
+// Add inside the map
+// We don't need the value only the key
+// Because we only want the unicity
+void Renderer::insertLineToDisplay(size_t row) {
+    to_display[row];
+}
+
+// Add the entire map in to_display
+// Usually used when change of map occures
+void Renderer::insertAllLinesToDisplay() {
+    for (size_t i = 0; i < WIDTH; i++) {
+        to_display[i];
+    }
+}
+
+void Renderer::cleanToDisplay() {
+    to_display.clear();
+}
+
+void Renderer::clearScreen() {
+    cout << ESC << "2J";
+}

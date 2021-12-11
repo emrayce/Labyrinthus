@@ -22,10 +22,13 @@ Game::Game(string path) {
     // Retrieve the mapCell for the renderer
     MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
 
+    renderer.clearScreen();
+
     renderer.setScreenFromMapCell(cell);            // Fill the renderer with the current cell
 
     // Set the player on the screen
     renderer.setPlayer(playerPosition.first, playerPosition.second);
+    renderer.insertAllLinesToDisplay();
 }
 
 
@@ -63,7 +66,9 @@ void Game::movePlayer(int row, int col) {
         renderer.setScreenFromMapCell(gameMap.getCell(playerMapCell.first, playerMapCell.second));
 
         unitMap.setChar(playerPosition.first, playerPosition.second, 'P');
+
         renderer.setPlayer(playerPosition.first, playerPosition.second);
+        renderer.insertAllLinesToDisplay();
     }
 
 
@@ -79,11 +84,15 @@ void Game::movePlayer(int row, int col) {
 //TODO use something different than playerPosition when sprite on several pixel will be implemented
         renderer.setPixel(playerPosition.first, playerPosition.second, renderer.createPixel(' '));
 
+        renderer.insertLineToDisplay(playerPosition.first);
+
         playerPosition.first = newPosX;
         playerPosition.second = newPosY;
 
         unitMap.setChar(playerPosition.first, playerPosition.second, 'P');
+
         renderer.setPlayer(playerPosition.first, playerPosition.second);
+        renderer.insertLineToDisplay(playerPosition.first);
     }
 }
 
@@ -148,29 +157,6 @@ void Game::gameLoop() {
     }
 }
 
-/*void Game::display() {
-    //clear screen and set cursor to row1 col1
-    cout << "\033[2J\033[1;1H";
-
-    MapCell cell = gameMap.getCell(playerMapCell.first, playerMapCell.second);
-    string displayed = "";
-
-    for (size_t i = 0; i < 20; i++) {
-        for (size_t j = 0; j < 55; j++) {
-            if (unitMap.getChar(i, j) != ' ') {
-                displayed += unitMap.getChar(i,j);
-            }
-            else {
-                displayed += cell.getChar(i, j);
-            }
-        }
-        displayed += '\n';
-    }
-    cout << displayed << endl;
-}
-*/
-
 void Game::display() {
-    //renderer.debug();
     renderer.display();
 }
