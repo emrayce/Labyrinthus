@@ -3,6 +3,7 @@
 
 #include "map_cell.h"
 #include "map.h"
+#include "renderer.h"
 
 #include <utility>
 
@@ -16,6 +17,8 @@ class Game {
 
         Map gameMap;                                // Entire map of the game
         MapCell unitMap;                            // Map where player and pnj move
+
+        Renderer renderer;
 
         pair<size_t, size_t> playerPosition;        // The player position on unitMap
         pair<size_t, size_t> playerMapCell;         // The index of the cell where the player is

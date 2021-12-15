@@ -21,9 +21,10 @@ bool MapCell::isPositionValid(size_t row, size_t col) {
     if (map.at(row * LENGTH + col) != ' ') {
         return false;
     }
-    
+
     return true;
 }
+
 
 // return false if an error occured
 // true otherwise
@@ -51,8 +52,8 @@ void MapCell::createMap(string path) {
         fillRow(line, row);
         row++;
     }
-
 }
+
 
 void MapCell::fillRow(string line, size_t row) {
     for (size_t i = 0; i < line.size(); i++) {
@@ -66,6 +67,7 @@ void MapCell::setChar(size_t row, size_t col, char c) {
         map.at(row * LENGTH + col) = c;
     }
 }
+
 
 char MapCell::getChar(size_t row, size_t col) {
     return map.at(row * LENGTH + col);
